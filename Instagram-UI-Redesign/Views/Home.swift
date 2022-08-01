@@ -30,7 +30,7 @@ struct Home: View {
                     Image(systemName: "ellipsis.message")
                         .foregroundStyle(.black, .black)
                 }
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 33)
                 .padding(.bottom, 10)
                 .font(.title2)
 //                .background(.green)
@@ -46,13 +46,28 @@ struct Home: View {
                                 .font(.title.bold())
                                 .foregroundColor(IGgray)
                             Spacer()
+                            RoundedRectangle(cornerRadius: 50)
+                                .frame(width: .infinity, height: 35)
+                                .padding(.leading, 80)
+                                .foregroundColor(.white)
+                                .overlay{
+                                    Image(systemName: "magnifyingglass")
+                                        .offset(x: -20)
+                                }
                             
                             
                         }
                         .padding(.horizontal)
                         
+                        // MARK: Posts section
+                        
+                        
                     }
                 }
+            }
+            VStack{
+                Spacer()
+                BottomMenu()
             }
         }
     }
@@ -110,6 +125,57 @@ struct Home: View {
             }
             .padding()
         }
+    }
+    
+    @ViewBuilder
+    func BottomMenu() -> some View{
+        ZStack{
+            RoundedRectangle(cornerRadius: 20)
+                .ignoresSafeArea()
+                .foregroundColor(.white)
+                .frame(height: 50)
+            HStack(spacing: 50){
+                Image(systemName: "house.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(.purple)
+                Image(systemName: "magnifyingglass")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 23, height: 23)
+                
+                Image(systemName: "plus.app")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 27, height: 27)
+                    .foregroundColor(.white)
+                    .background{
+                        LinearGradient(colors: [
+                            .purple,
+                            .pink,
+                            .red,
+                            .yellow
+                        ], startPoint: .top, endPoint: .bottomTrailing)
+                        .frame(width: 60, height: 60)
+                        .clipShape(Circle())
+                    }
+                    .offset(y: -20)
+                
+                Image(systemName: "heart")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 23, height: 23)
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24, height: 24)
+            }
+            .foregroundColor(IGgray)
+            .frame(maxWidth: .infinity, maxHeight: 50)
+            .padding(.bottom, -20)
+        }
+//        .background(.red)
     }
 }
 
