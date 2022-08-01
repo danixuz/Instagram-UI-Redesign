@@ -52,6 +52,7 @@ struct Home: View {
                                 .foregroundColor(.white)
                                 .overlay{
                                     Image(systemName: "magnifyingglass")
+                                        .foregroundColor(IGgray)
                                         .offset(x: -20)
                                 }
                             
@@ -60,6 +61,12 @@ struct Home: View {
                         .padding(.horizontal)
                         
                         // MARK: Posts section
+                        VStack{
+                            ForEach(samplePosts){ post in
+                                Post(for: post)
+                            }
+                        }
+                        .padding(.bottom, 53)
                         
                         
                     }
@@ -176,6 +183,50 @@ struct Home: View {
             .padding(.bottom, -20)
         }
 //        .background(.red)
+    }
+    
+    @ViewBuilder
+    func Post(for post: Post) -> some View{
+        let poster = post.user
+        VStack{
+            // MARK: Top row
+            HStack(spacing: 15){
+                Image(poster.image)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+                VStack(alignment: .leading){
+                    Text(poster.username)
+                        .font(.caption)
+                        .foregroundColor(IGgray)
+                        .fontWeight(.semibold)
+                    Text("\(post.timeAgo) ago")
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                    
+                }
+                Spacer()
+                // MARK: Icons
+                HStack{
+                    Image(systemName: "paperplane")
+                    Image(systemName: "circle.grid.2x2")
+                    
+                }
+                .foregroundColor(.gray)
+            }
+            .padding(.horizontal, 6)
+            
+            Image(post.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .cornerRadius(20)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.white)
+        .cornerRadius(20)
+        .padding(.horizontal)
+        .padding(.bottom, 10)
     }
 }
 
