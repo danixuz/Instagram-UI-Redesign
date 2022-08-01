@@ -219,7 +219,47 @@ struct Home: View {
             Image(post.image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .cornerRadius(20)
+                .cornerRadius(15)
+                .overlay{
+                    VStack(alignment: .center){
+                        Spacer() // push to the bottom of the picture
+                        HStack{
+                            // MARK: Like count
+                            HStack{
+                                Circle()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.pink)
+                                    .overlay{
+                                        Image(systemName: "heart.fill")
+                                            .foregroundColor(.white)
+                                            .font(.subheadline)
+                                    }
+                                Text("\(post.likeCount.roundedWithAbbreviations)")
+                                    .font(.caption2)
+                                    .padding(4)
+                                    .padding(.horizontal, 4)
+                                    .background{
+                                        Capsule(style: .continuous)
+                                            .fill(.ultraThinMaterial)
+                                    }
+                            }
+                            Spacer()
+                            // MARK: Comment button
+                            Image(systemName: "message.fill")
+                                .font(.subheadline)
+                                .background{
+                                    Circle()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.white)
+                                }
+                        }
+                    }
+                    .padding()
+                    .padding(.horizontal, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background(.green)
+                    
+                }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
